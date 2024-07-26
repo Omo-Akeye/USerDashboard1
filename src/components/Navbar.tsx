@@ -17,24 +17,24 @@ export default function Navbar() {
           <input type="text" placeholder="Search here ..." className='bg-transparent outline-none w-[90%] text-sm' />
         </div>
       </div>
-      <ul className='flex text-[#647995] text-xs font-normal [_&li]:flex [_&li]:flex-col [_&li]:items-center gap-x-2'>
-        <li>
+      <ul className='flex text-[#647995] text-xs gap-x-2'>
+        <li className='flex flex-col items-center'>
           <img src={bell} alt="Notification"  />
           <h3 className=''>Notification</h3>       
         </li>
-        <li>
+        <li className='flex flex-col items-center'>
           <img src={wallet} alt="Wallet"  />
           <h3 className=''>Wallet</h3>       
         </li>
-        <li>
+        <li className='flex flex-col items-center'>
           <img src={question} alt="Help"  />
           <h3 className=''>Help</h3>       
         </li>
-        <li>
+        <li className='flex flex-col items-center'>
           <img src={settingsIcon} alt="Settings"  />
           <h3 className='hidden md:block'>Settings</h3>       
         </li>
-        <li>
+        <li className='flex flex-col items-center'>
           <img src={user} alt="User"  />
           <h3 className='hidden md:block'>User</h3>       
         </li>
