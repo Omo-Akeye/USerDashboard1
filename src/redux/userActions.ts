@@ -10,7 +10,7 @@ import {
   User,
 } from './userReducer';
 
-const API_URL = 'https://ca076967c0fd722840e8.free.beeceptor.com/api'
+const API_URL = 'https://ca076967c0fd722840e8.free.beeceptor.com/api';
 
 export const fetchUsers = () => async (dispatch: AppDispatch) => {
   dispatch(fetchUsersStart());
@@ -18,7 +18,7 @@ export const fetchUsers = () => async (dispatch: AppDispatch) => {
     const response = await axios.get(`${API_URL}/users`);
     dispatch(fetchUsersSuccess(response.data));
   } catch (error) {
-    dispatch(fetchUsersFailure(error.message));
+    dispatch(fetchUsersFailure('ERROR'));
   }
 };
 
@@ -48,6 +48,5 @@ export const deleteUserAction = (userId: number) => async (dispatch: AppDispatch
     console.error('Error deleting user:', error);
   }
 };
-export { deleteUser };
-    export type { User };
 
+export type { User };

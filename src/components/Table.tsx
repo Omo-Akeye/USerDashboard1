@@ -8,17 +8,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import searchBar from '../assets/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg';
+import icon from '../assets/icon (2).svg'
+import buttonicon from '../assets/button-icon.svg'
+import check from '../assets/Outer Rectangle.svg'
 import filter from '../assets/icon.svg';
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { User, fetchUsers, deleteUser } from "@/redux/userActions";
+import { RootState, AppDispatch } from "@/redux/store";
+import { User, fetchUsers, deleteUserAction } from "@/redux/userActions";
 import UserForm from "./UserForm";
 
 export function MainTable() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const users = useSelector((state: RootState) => state.users.users);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -30,13 +33,13 @@ export function MainTable() {
   };
 
   const handleDelete = (userId: number) => {
-    dispatch(deleteUser(userId));
+    dispatch(deleteUserAction(userId));
   };
 
   return (
     <div className="w-full mt-6">
       <div className="flex items-center justify-between p-4 bg-white border-b">
-        <div className="flex items-center text-sm gap-x-2">
+        <div className="flex items-center text-sm gap-x-2 w-[291px]">
           <div className="flex items-center px-3 py-2 border rounded-md gap-x-2">
             <img src={searchBar} alt="Search Icon" width={14} />
             <input
@@ -51,29 +54,33 @@ export function MainTable() {
           </button>
         </div>
         <button
-          className="px-4 py-2 text-white bg-blue-500 rounded-md"
+          className="px-4 py-2 text-white bg-blue-500 rounded-md flex text-sm items-center gap-x-2"
           onClick={() => {
             setCurrentUser(null);
             setIsOpen(true);
           }}
-        >
+        > <img src={buttonicon} alt="btn-icon" width={16} />
           New User
         </button>
       </div>
 
-      <Table className="w-[950px] bg-white">
-        <TableHeader>
+      <Table className="w-[1004px] bg-white">
+        <TableHeader className="bg-gray-100">
           <TableRow>
-            <TableHead className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+            <TableHead className="px-6 py-3 tracking-wider text-left flex gap-x-3 ">
+              <img src={check} alt="checkbox" />
               Name
+              <img src={icon} alt="icon" width={12} />
             </TableHead>
-            <TableHead className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+            <TableHead className="px-6 py-3 text-left">
               Email Address
+              
             </TableHead>
-            <TableHead className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+            <TableHead className="px-6 py-3 text-left ">
               Role
+              
             </TableHead>
-            <TableHead className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+            <TableHead className="px-6 py-3  text-left ">
               Actions
             </TableHead>
           </TableRow>
@@ -81,34 +88,36 @@ export function MainTable() {
         <TableBody className="divide-y divide-gray-200">
           {users.map((user: User) => (
             <TableRow key={user.id}>
-              <TableCell className="px-6 py-4 font-medium whitespace-nowrap">
-                {user.name}
+              <TableCell className="px-6 py-4 font-medium whitespace-nowrap gap-x-2 flex">
+              <img src={check} alt="checkbox" /> {user.name}
               </TableCell>
               <TableCell className="px-6 py-4 whitespace-nowrap">
                 {user.email}
               </TableCell>
               <TableCell className="px-6 py-4 whitespace-nowrap">
-                <span
-                  className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    user.role === 'Administrator'
-                      ? 'bg-blue-100 text-blue-800'
-                      : user.role === 'Sales Manager'
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-orange-100 text-orange-800'
-                  }`}
-                >
+              <span
+  className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+    user.role === 'Administrator'
+      ? 'bg-blue-100 text-[#0D6EFD]'
+      : user.role === 'Sales Manager'
+      ? 'bg-green-100 text-[#0F973D]'
+      : user.role === ' Sales Representative'
+      ? 'bg-gray-100 text-gray-800'
+      : 'bg-orange-100 text-[#F58A07]'
+  }`}
+>
                   {user.role}
                 </span>
               </TableCell>
               <TableCell className="px-6 py-4 text-sm font-medium whitespace-nowrap">
                 <button
-                  className="text-indigo-600 hover:text-indigo-900"
+                  className="text-indigo-600 hover:text-indigo-900 "
                   onClick={() => handleEdit(user)}
                 >
                   Edit
                 </button>
                 <button
-                  className="ml-4 text-red-600 hover:text-red-900"
+                  className="ml-4 text-[#98A2B3] hover:text-black"
                   onClick={() => handleDelete(user.id!)}
                 >
                   Remove
@@ -127,22 +136,3 @@ export function MainTable() {
 }
 
 export default MainTable;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

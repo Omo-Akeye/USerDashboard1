@@ -10,9 +10,9 @@ export default function UserTable() {
       <p className='text-[#667185]'>Manage all users in your business</p>
 
 
-      <div className='flex'>
-        <h1>Users</h1>
-        <h2>Roles</h2>
+      <div className='flex font-medium'>
+        <h1 className='text-[#0D6EFD]  p-2 border-b-2 border-[#0D6EFD]'>Users</h1>
+        <h2 className='p-2 text-[#98A2B3]'>Roles</h2>
       </div>
 
       <MainTable/>
