@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUser, updateUser, User } from '../redux/userReducer';
+import { createUser, updateUserAction, User } from '../redux/userActions';
 import x from '../assets/X.svg';
 import avatar from '../assets/Frame 1.svg';
 
@@ -21,7 +21,6 @@ function UserForm({ currentUser, onClose }: UserFormProps) {
   }, [currentUser]);
 
   useEffect(() => {
-    
     const { name, email, role } = formData;
     setIsValid(name.trim() !== '' && email.trim() !== '' && role.trim() !== '');
   }, [formData]);
@@ -34,9 +33,9 @@ function UserForm({ currentUser, onClose }: UserFormProps) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (currentUser) {
-      dispatch(updateUser(formData));
+      dispatch(updateUserAction(formData));
     } else {
-      dispatch(addUser(formData));
+      dispatch(createUser(formData));
     }
     onClose();
   };
