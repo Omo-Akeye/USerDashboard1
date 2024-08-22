@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface User {
-  id: number;
+  _id?: any;
   name: string;
   email: string;
   role: string;
@@ -38,13 +38,13 @@ const userSlice = createSlice({
       state.users.push(action.payload);
     },
     updateUser(state, action: PayloadAction<User>) {
-      const index = state.users.findIndex(user => user.id === action.payload.id);
+      const index = state.users.findIndex(user => user._id === action.payload._id);
       if (index !== -1) {
         state.users[index] = action.payload;
       }
     },
-    deleteUser(state, action: PayloadAction<number>) {
-      state.users = state.users.filter(user => user.id !== action.payload);
+    deleteUser(state, action: PayloadAction<string>) {
+      state.users = state.users.filter(user => user._id !== action.payload);
     },
   },
 });

@@ -6,7 +6,7 @@ import UserTable from './UserTable'
 
 export default function UserSettings() {
   return (
-    <div className='flex px-6 mt-5 gap-x-14'>
+    <div className='flex mt-5 lg:gap-x-14 gap-x-6 w-[95%] mx-auto'>
         <Sidebar/>
         <UserTable/>
         

@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { createUser, updateUserAction, User } from '../redux/userActions';
+import { createUser, updateUserAction, User } from '../components/redux/userActions'
 import x from '../assets/X.svg';
 import avatar from '../assets/Frame 1.svg';
 
@@ -10,7 +10,7 @@ interface UserFormProps {
 }
 
 function UserForm({ currentUser, onClose }: UserFormProps) {
-  const [formData, setFormData] = useState<User>({ id: 0, name: '', email: '', role: '' });
+  const [formData, setFormData] = useState<User>({ name: '', email: '', role: '' });
   const [isValid, setIsValid] = useState(false);
   const dispatch = useDispatch();
 
@@ -33,22 +33,22 @@ function UserForm({ currentUser, onClose }: UserFormProps) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (currentUser) {
-      dispatch(updateUserAction(formData));
+      dispatch<any>(updateUserAction(formData));
     } else {
-      dispatch(createUser(formData));
+      dispatch<any>(createUser(formData));
     }
     onClose();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg w-[588px] p-8">
+      <div className="w-3/4 sm:p-8 p-4 bg-white rounded-lg shadow-lg md:w-[40%]">
         <button type="button" onClick={onClose}>
           <img src={x} alt="Close" />
         </button>
         <div className="flex flex-col items-center">
-          <img src={avatar} alt="Avatar" />
-          <h2 className="mb-4 text-2xl font-bold">{currentUser ? 'Edit User' : 'New User'}</h2>
+          <img src={avatar} alt="Avatar" className='max-sm:w-12' />
+          <h2 className="mb-4 text-xl font-bold sm:text-2xl">{currentUser ? 'Edit User' : 'New User'}</h2>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -62,7 +62,7 @@ function UserForm({ currentUser, onClose }: UserFormProps) {
               value={formData.email}
               placeholder="New User's Email Address"
               onChange={handleChange}
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="mb-4">
@@ -76,7 +76,7 @@ function UserForm({ currentUser, onClose }: UserFormProps) {
               value={formData.name}
               placeholder="New User's Full name"
               onChange={handleChange}
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="mb-4">
@@ -88,7 +88,7 @@ function UserForm({ currentUser, onClose }: UserFormProps) {
               name="role"
               value={formData.role}
               onChange={handleChange}
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">Select Role</option>
               <option value="Administrator">Administrator</option>
@@ -96,19 +96,7 @@ function UserForm({ currentUser, onClose }: UserFormProps) {
               <option value="Sales Representative">Sales Representative</option>
             </select>
           </div>
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Create Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Create a Password for new User"
-              onChange={handleChange}
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+        
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-500 rounded-md"

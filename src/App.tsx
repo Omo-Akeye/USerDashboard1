@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar"
+
 import UserSettings from "./components/UserSettings"
 
 
@@ -6,7 +7,7 @@ function App() {
 
 
   return (
-    <div className="bg-gray-100 ">
+    <div className="w-full">
     <Navbar/>
     <UserSettings/>
  </div>
