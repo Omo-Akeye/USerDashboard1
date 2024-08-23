@@ -10,7 +10,7 @@ import {
   User,
 } from './userReducer';
 
-const API_URL = 'https://user-backend-k5xp.onrender.com/users';
+const API_URL = 'https://user-backend-3fh9.onrender.com/users';
 
 export const fetchUsers = () => async (dispatch: AppDispatch) => {
   dispatch(fetchUsersStart());
